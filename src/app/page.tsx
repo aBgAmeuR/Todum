@@ -1,12 +1,13 @@
 import { AddTodoForm } from "@/components/forms/add-todo-form";
+import { InfosTodo } from "@/components/infos-todo";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
       <div className="absolute top-0 left-0 right-0 h-[200px] bg-secondary -z-10"></div>
-      <main className="flex flex-col w-full max-w-[736px] mt-[70px] mx-8 gap-[43px] items-center">
-        <div className="flex flex-row items-center gap-3">
+      <main className="flex flex-col w-full max-w-[736px] mt-[70px] mx-8 items-center">
+        <div className="flex flex-row items-center gap-3 mb-[43px] ">
           <Image src="/logo.svg" width={22} height={36} alt={"Logo"} />
           <h1 className="text-xl font-black">
             <span className="text-blue">to</span>
@@ -14,6 +15,7 @@ export default function Home() {
           </h1>
         </div>
         <AddTodoForm />
+        <InfosTodo />
       </main>
     </>
   )

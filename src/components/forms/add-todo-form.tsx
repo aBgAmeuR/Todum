@@ -4,13 +4,15 @@ import React from 'react'
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AddTodoSchema } from "@/lib/validations";
-import { Form, SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { useRouter } from 'next/navigation';
 
 type AddTodoFormValues = z.infer<typeof AddTodoSchema>
 
 export const AddTodoForm = () => {
+  const router = useRouter()
 
   const form = useForm<AddTodoFormValues>({
     resolver: zodResolver(AddTodoSchema),
@@ -19,8 +21,16 @@ export const AddTodoForm = () => {
     }
   })
 
-  const onSubmit: SubmitHandler<AddTodoFormValues> = (data) => {
-    console.log(data.content);
+  const onSubmit: SubmitHandler<AddTodoFormValues> = async (data) => {
+    const todo = await fetch("/api/todos", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+
+    if (todo.ok) {
+      form.reset()
+      router.refresh()
+    }
   }
 
   return (
