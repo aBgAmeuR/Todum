@@ -17,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={cn("bg-primary flex justify-center", inter.className)}>{children}</body>
+      <body className={cn("bg-primary flex justify-center", inter.className)} suppressHydrationWarning={true}>
+        {children}
+      </body>
     </html>
   )
 }

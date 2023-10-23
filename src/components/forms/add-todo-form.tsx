@@ -8,15 +8,18 @@ import { Form, SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
+type AddTodoFormValues = z.infer<typeof AddTodoSchema>
+
 export const AddTodoForm = () => {
-  const form = useForm<z.infer<typeof AddTodoSchema>>({
+
+  const form = useForm<AddTodoFormValues>({
     resolver: zodResolver(AddTodoSchema),
     defaultValues: {
       content: ""
     }
   })
 
-  const onSubmit: SubmitHandler<z.infer<typeof AddTodoSchema>> = (data) => {
+  const onSubmit: SubmitHandler<AddTodoFormValues> = (data) => {
     console.log(data.content);
   }
 
