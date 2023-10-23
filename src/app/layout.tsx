@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={cn("bg-primary", inter.className)}>{children}</body>
+    <html lang="fr">
+      <body className={cn("bg-primary flex justify-center", inter.className)}>{children}</body>
     </html>
   )
 }
