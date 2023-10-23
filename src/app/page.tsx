@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { AddTodoForm } from "@/components/forms/add-todo-form";
 import Image from "next/image";
 
 export default function Home() {
@@ -14,10 +13,7 @@ export default function Home() {
             <span className="text-purple">dum</span>
           </h1>
         </div>
-        <div className="flex flex-row gap-2 items-center w-full">
-          <Input placeholder="Ajouter une nouvelle tâche" className="h-[54px]" />
-          <Button className="h-[54px]">Ajouter</Button>
-        </div>
+        <AddTodoForm />
       </main>
     </>
   )

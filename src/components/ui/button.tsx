@@ -1,14 +1,22 @@
-import { cn } from '@/lib/utils'
-import React, { PropsWithChildren } from 'react'
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
-type Props = PropsWithChildren<{
-  className?: string
-}>
-
-export const Button = ({ children, className }: Props) => {
-  return (
-    <button className={cn('p-4 rounded-lg bg-blue text-primary', className)}>
-      {children}
-    </button>
-  )
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean
 }
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, asChild = false, ...props }, ref) => {
+    return (
+      <button
+        className={cn('p-4 rounded-lg bg-blue text-primary', className)}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Button.displayName = "Button"
+
+export { Button }
