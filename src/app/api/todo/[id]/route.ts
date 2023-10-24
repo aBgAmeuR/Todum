@@ -1,18 +1,17 @@
 import * as z from 'zod';
 import prisma from '@/lib/prisma';
-import { AddTodoSchema } from '@/lib/validations';
 
-export async function POST(req: Request) {
+type Params = {
+  id: string;
+};
+
+export async function DELETE(req: Request, context: { params: Params }) {
   try {
-    const json = await req.json();
-    const body = AddTodoSchema.parse(json);
+    const { id } = context.params;
 
-    const todo = await prisma.todo.create({
-      data: {
-        content: body.content,
-      },
-      select: {
-        id: true,
+    const todo = await prisma.todo.delete({
+      where: {
+        id: id as string,
       },
     });
 

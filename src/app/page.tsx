@@ -1,5 +1,6 @@
 import { AddTodoForm } from "@/components/forms/add-todo-form";
 import { InfosTodo } from "@/components/infos-todo";
+import { Todos } from "@/components/todos";
 import Image from "next/image";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         </div>
         <AddTodoForm />
         <InfosTodo />
+        <Todos />
       </main>
     </>
   )
