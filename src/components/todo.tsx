@@ -31,12 +31,15 @@ export const Todo = ({ todo }: TodoProps) => {
   }
 
   const updateTodo = async () => {
-    const res = await fetch(`/api/todo/done/${todo.id}`, {
+    const res = await fetch(`/api/todo/done`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ done: !todo.done }),
+      body: JSON.stringify({
+        id: todo.id,
+        done: !todo.done
+      }),
     })
 
     if (!res.ok) {

@@ -1,6 +1,6 @@
 import * as z from 'zod';
 import prisma from '@/lib/prisma';
-import { IdTodoSchema } from '@/lib/validations';
+import { DeleteTodoSchema } from '@/lib/validations';
 
 type Params = {
   id: string;
@@ -9,7 +9,7 @@ type Params = {
 export async function DELETE(req: Request, context: { params: Params }) {
   try {
     const json = context.params;
-    const body = IdTodoSchema.parse(json);
+    const body = DeleteTodoSchema.parse(json);
 
     const todo = await prisma.todo.delete({
       where: {

@@ -10,7 +10,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, asChild = false, ...props }, ref) => {
     return (
       <button
-        className={cn('p-4 rounded-lg bg-blue text-primary', className)}
+        className={cn('p-4 rounded-lg bg-blue text-primary disabled:pointer-events-none disabled:opacity-80', className)}
         ref={ref}
         {...props}
       />
