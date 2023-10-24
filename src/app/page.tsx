@@ -1,7 +1,9 @@
 import { AddTodoForm } from "@/components/forms/add-todo-form";
 import { InfosTodo } from "@/components/infos-todo";
 import { Todos } from "@/components/todos";
+import { TodosLoading } from "@/components/todos-loading";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -17,7 +19,9 @@ export default function Home() {
         </div>
         <AddTodoForm />
         <InfosTodo />
-        <Todos />
+        <Suspense fallback={<TodosLoading />}>
+          <Todos />
+        </Suspense>
       </main>
     </>
   )
