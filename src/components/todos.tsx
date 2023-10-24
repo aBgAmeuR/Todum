@@ -6,7 +6,7 @@ export const Todos = async () => {
   const todo = await prisma.todo.findMany()
 
   return (
-    <div className='flex flex-col gap-3 w-full'>
+    <div className='flex flex-col gap-3 w-full mb-16'>
       {todo.map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}
