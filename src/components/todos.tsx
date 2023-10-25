@@ -10,7 +10,7 @@ export const Todos = async () => {
   })
 
   return (
-    <div className='flex flex-col gap-3 w-full mb-16'>
+    <div className='flex flex-col gap-3 w-full mb-8'>
       {todo.map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}
