@@ -1,10 +1,3 @@
-// 'use client'
-
-// import React from 'react';
-
-// interface Props {
-//   width: React.CSSProperties['width'];
-//   height: React.CSSProperties['height'];
 import { cn } from "@/lib/utils"
 
 function Skeleton({

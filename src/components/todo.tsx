@@ -1,9 +1,9 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React from 'react'
-import { Check } from './ui/check';
+import { Check } from '@/components/ui/check';
 import { cn } from '@/lib/utils';
 
 type TodoProps = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge } from './ui/badge'
+import { Badge } from '@/components/ui/badge'
 import prisma from '@/lib/prisma';
 
 export const InfosTodo = async () => {

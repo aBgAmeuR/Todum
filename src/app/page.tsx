@@ -1,9 +1,9 @@
-import { AddTodoForm } from "@/components/forms/add-todo-form";
-import { InfosTodo } from "@/components/infos-todo";
-import { Todos } from "@/components/todos";
-import { TodosLoading } from "@/components/todos-loading";
-import Image from "next/image";
 import { Suspense } from "react";
+import Image from "next/image";
+import { Todos } from "@/components/todos";
+import { InfosTodo } from "@/components/infos-todo";
+import { TodosLoading } from "@/components/todos-loading";
+import { AddTodoForm } from "@/components/forms/add-todo-form";
 
 export default function Home() {
   return (
