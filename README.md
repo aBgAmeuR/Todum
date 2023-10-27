@@ -1,6 +1,6 @@
 # Todum
 
-Todum is a simple todo list web application.
+Todum is a simple todo list web application build with Next.js.
 
 ## Installation
 
