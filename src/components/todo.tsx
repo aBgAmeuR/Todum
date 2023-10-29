@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Check } from '@/components/ui/check';
 import { cn } from '@/lib/utils';
 import { deleteTodo, doneTodo } from '@/actions/todo.actions';
-import { revalidatePath } from 'next/cache';
 
 type TodoProps = {
   todo: {

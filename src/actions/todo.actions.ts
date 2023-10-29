@@ -4,19 +4,20 @@ import { prisma } from '@/lib/prisma';
 import { AddTodoSchema, DeleteTodoSchema, DoneTodoSchema } from '@/lib/validations';
 import { revalidatePath } from 'next/cache';
 
-export async function createTodo(data: { content: string }) {
-  const { content } = AddTodoSchema.parse(data);
+export async function createTodo(formData: FormData) {
+  const data = AddTodoSchema.parse({
+    content: formData.get('content'),
+  });
 
-  const todo = await prisma.todo.create({
+  await prisma.todo.create({
     data: {
-      content: content,
+      content: data.content,
     },
     select: {
       id: true,
     },
   });
   revalidatePath('/');
-  return todo;
 }
 
 export async function deleteTodo(data: { id: string }) {
