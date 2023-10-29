@@ -21,8 +21,6 @@ export async function createTodo(formData: FormData) {
 }
 
 export async function deleteTodo(data: { id: string }) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   const { id } = DeleteTodoSchema.parse(data);
 
   const todo = await prisma.todo.delete({
@@ -35,8 +33,6 @@ export async function deleteTodo(data: { id: string }) {
 }
 
 export async function doneTodo(data: { id: string; done: boolean }) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   const { id, done } = DoneTodoSchema.parse(data);
 
   const todo = await prisma.todo.update({
