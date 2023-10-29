@@ -13,7 +13,7 @@ export const Todos = async () => {
   return (
     <div className="flex flex-col gap-3 w-full mb-8">
       {todo.map((todo: TodoType) => (
-        <Todo key={todo.id} todo={todo} />
+        <Todo key={todo.id} {...todo} />
       ))}
     </div>
   );
