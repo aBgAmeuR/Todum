@@ -1,50 +1,25 @@
-'use client';
-
-import React from 'react'
-import * as z from "zod"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { useRouter } from 'next/navigation';
-import { zodResolver } from "@hookform/resolvers/zod"
-import { AddTodoSchema } from "@/lib/validations";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-type AddTodoFormValues = z.infer<typeof AddTodoSchema>
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
+import { createTodo } from '@/actions/todo.actions';
 
 export const AddTodoForm = () => {
-  const [isPending, startTransition] = React.useTransition();
-  const router = useRouter()
+  async function onSubmit(formData: FormData) {
+    'use server';
 
-  const form = useForm<AddTodoFormValues>({
-    resolver: zodResolver(AddTodoSchema),
-    defaultValues: {
-      content: ""
-    }
-  })
-
-  const onSubmit: SubmitHandler<AddTodoFormValues> = async (data) => {
-    startTransition(async () => {
-      try {
-        const todo = await fetch("/api/todos", {
-          method: "POST",
-          body: JSON.stringify(data)
-        })
-
-        if (todo.ok) {
-          form.reset()
-          router.refresh()
-        }
-      } catch (err) {
-        console.error(err)
-      }
-    })
+    await createTodo({
+      content: formData.get('content') as string,
+    });
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row gap-2 items-center w-full">
-      <Input type="text" className="h-[54px]" placeholder="Ajouter une nouvelle tâche" {...form.register("content")} />
-      <Button type="submit" className="h-[54px]" disabled={isPending}>Ajouter</Button>
+    <form action={onSubmit} className="flex flex-row gap-2 items-center w-full">
+      <Input type="text" name="content" className="h-[54px]" placeholder="Ajouter une nouvelle tâche" />
+      <Button type="submit" className="h-[54px]">
+        Ajouter
+      </Button>
     </form>
-  )
-}
-
+  );
+};
