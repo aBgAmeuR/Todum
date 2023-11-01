@@ -1,44 +1,40 @@
 'use client';
 
-import React, { useOptimistic } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { Check } from '@/components/ui/check';
+import useSWR from 'swr';
+import { doneTodo, doneTodoOptions } from '@/helpers/doneTodo';
+import { deleteTodo, deleteTodoOptions } from '@/helpers/deleteTodo';
 import { cn } from '@/lib/utils';
-import { deleteTodo, doneTodo, createTodo } from '@/actions/todo.actions';
+import fetchTodos from '@/lib/fetchTodos';
+import { Check } from '@/components/ui/check';
 
 type TodoProps = {
   id: string;
   createdAt: Date;
   content: string;
   done: boolean;
-  isDeleted?: boolean;
 };
 
-export const Todo = ({ id, createdAt, content, done, isDeleted = false }: TodoProps) => {
-  const [optimisticDone, addOptimisticDone] = useOptimistic(done, (done: boolean) => !done);
-  const [optimisticDelete, addOptimisticDelete] = useOptimistic(isDeleted, (isDeleted: boolean) => !isDeleted);
+export const Todo = ({ id, content, done }: TodoProps) => {
+  const { data, mutate } = useSWR('/api/todos', fetchTodos, {
+    revalidateOnFocus: false,
+  });
 
   const handleUpdateTodo = async () => {
-    addOptimisticDone(!done);
-    await doneTodo({
-      id: id,
-      done: !done,
-    });
+    await mutate(doneTodo(id, !done, data), doneTodoOptions(id, !done, data));
   };
 
   const handleDeleteTodo = async () => {
-    addOptimisticDelete(!isDeleted);
-    await deleteTodo({
-      id: id,
-    });
+    await mutate(deleteTodo(id, data), deleteTodoOptions(id, data));
   };
 
   return (
-    <div className={cn('flex flex-row gap-3 w-full p-4 items-center bg-tertiary font-normal text-primary rounded-lg border border-secondary text-lg', optimisticDelete ? 'hidden' : null)}>
+    <div className="flex flex-row gap-3 w-full p-4 items-center bg-tertiary font-normal text-primary rounded-lg border border-secondary text-lg">
       <div onClick={handleUpdateTodo} className="p-[3px] select-none">
-        <Check check={optimisticDone} />
+        <Check check={done} />
       </div>
-      <p className={cn('w-full', optimisticDone ? 'text-secondary line-through' : '')}>{content}</p>
+      <p className={cn('w-full', done ? 'text-secondary line-through' : null)}>{content}</p>
       <button onClick={handleDeleteTodo} className="px-1.5 py-[5px] select-none">
         <Image src="/trash.svg" width={12.48} height={14} alt="Check" />
       </button>

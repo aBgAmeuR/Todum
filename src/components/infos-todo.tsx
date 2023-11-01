@@ -1,14 +1,14 @@
 import React from 'react';
+import { Todo } from '@/types/todo';
 import { Badge } from '@/components/ui/badge';
-import { prisma } from '@/lib/prisma';
 
-export const InfosTodo = async () => {
-  const todosLength = await prisma.todo.count();
-  const todosDoneLength = await prisma.todo.count({
-    where: {
-      done: true,
-    },
-  });
+type Props = {
+  todos: Todo[];
+};
+
+export const InfosTodo = ({ todos }: Props) => {
+  const todosLength = todos.length;
+  const todosDoneLength = todos.filter((todo) => todo.done).length;
 
   return (
     <div className="flex flex-row justify-between w-full pt-16 mb-6">
