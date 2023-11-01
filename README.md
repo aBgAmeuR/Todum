@@ -24,6 +24,7 @@ Todum is a simple todo list web application build with Next.js.
 - [Prisma](https://www.prisma.io/)
 - [React Hook Form](https://react-hook-form.com/)
 - [Zod](https://zod.dev/)
+- [SWR](https://swr.vercel.app/)
 
 ## License
 
