@@ -8,6 +8,8 @@ import { Todo } from '@/components/todo';
 import { TodosLoading } from '@/components/todos-loading';
 import { InfosTodo } from '@/components/infos-todo';
 import { AddTodoForm } from '@/components/forms/add-todo-form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export const Todos = () => {
   const { data, isLoading } = useSWR('/api/todos', getTodos, {
@@ -17,6 +19,12 @@ export const Todos = () => {
   if (isLoading) {
     return (
       <>
+        <div className="flex flex-row gap-2 items-center w-full">
+          <Input type="text" className="h-[54px]" placeholder="Ajouter une nouvelle tâche" disabled />
+          <Button type="submit" className="h-[54px]" disabled>
+            Ajouter
+          </Button>
+        </div>
         <InfosTodo todos={[]} />
         <TodosLoading />
       </>
