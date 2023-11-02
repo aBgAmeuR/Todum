@@ -22,7 +22,6 @@
 - [Tailwind CSS](https://tailwindcss.com/)
 - [MongoDB](https://www.mongodb.com/)
 - [Prisma](https://www.prisma.io/)
-- [React Hook Form](https://react-hook-form.com/)
 - [Zod](https://zod.dev/)
 - [SWR](https://swr.vercel.app/)
 
