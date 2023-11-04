@@ -12,7 +12,7 @@ export async function getTodos() {
       },
     });
 
-    return todos;
+    return todos || [];
   } catch (error) {
     return {
       error: 'Something went wrong!',
@@ -23,6 +23,8 @@ export async function getTodos() {
 export async function createTodo(data: { content: string }) {
   try {
     const { content } = AddTodoSchema.parse(data);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     await prisma.todo.create({
       data: {
@@ -44,6 +46,7 @@ export async function createTodo(data: { content: string }) {
 export async function deleteTodo(data: { id: string }) {
   try {
     const { id } = DeleteTodoSchema.parse(data);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     await prisma.todo.delete({
       where: {
@@ -60,6 +63,7 @@ export async function deleteTodo(data: { id: string }) {
 export async function doneTodo(data: { id: string; done: boolean }) {
   try {
     const { id, done } = DoneTodoSchema.parse(data);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     await prisma.todo.update({
       where: {

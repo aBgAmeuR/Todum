@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import { Todos } from '@/components/todos';
+import { HydrationBoundary } from '@tanstack/react-query';
+import { getTodos } from '@/actions/todo.actions';
 
 export default async function Page() {
+  const todos = await getTodos();
+
   return (
     <>
       <div className="absolute top-0 left-0 right-0 h-[200px] bg-secondary -z-10"></div>
@@ -13,7 +17,9 @@ export default async function Page() {
             <span className="text-purple">dum</span>
           </h1>
         </div>
-        <Todos />
+        <HydrationBoundary state={["todos", todos]}>
+          <Todos />
+        </HydrationBoundary>
       </main>
     </>
   );
