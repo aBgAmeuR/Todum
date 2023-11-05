@@ -2,7 +2,6 @@
 
 import { prisma } from '@/lib/prisma';
 import { AddTodoSchema, DeleteTodoSchema, DoneTodoSchema } from '@/lib/validations';
-import { revalidatePath } from 'next/cache';
 
 export async function getTodos() {
   try {
@@ -24,8 +23,6 @@ export async function createTodo(data: { content: string }) {
   try {
     const { content } = AddTodoSchema.parse(data);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     await prisma.todo.create({
       data: {
         content: content,
@@ -38,15 +35,12 @@ export async function createTodo(data: { content: string }) {
     return {
       error: 'Something went wrong!',
     };
-  } finally {
-    revalidatePath('/');
   }
 }
 
 export async function deleteTodo(data: { id: string }) {
   try {
     const { id } = DeleteTodoSchema.parse(data);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     await prisma.todo.delete({
       where: {
@@ -63,7 +57,6 @@ export async function deleteTodo(data: { id: string }) {
 export async function doneTodo(data: { id: string; done: boolean }) {
   try {
     const { id, done } = DoneTodoSchema.parse(data);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     await prisma.todo.update({
       where: {
@@ -77,7 +70,5 @@ export async function doneTodo(data: { id: string; done: boolean }) {
     return {
       error: 'Something went wrong!',
     };
-  } finally {
-    revalidatePath('/');
   }
 }
