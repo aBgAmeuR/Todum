@@ -23,7 +23,7 @@
 - [MongoDB](https://www.mongodb.com/)
 - [Prisma](https://www.prisma.io/)
 - [Zod](https://zod.dev/)
-- [SWR](https://swr.vercel.app/)
+- [React Query](https://tanstack.com/query)
 
 ## License
 
