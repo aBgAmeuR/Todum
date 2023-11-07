@@ -7,7 +7,11 @@ export default async function Page() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['todos'],
-    queryFn: getTodos,
+    queryFn: async () => {
+      const todos = await getTodos();
+      if (Array.isArray(todos)) return todos;
+      throw new Error('error occured');
+    },
   });
 
   return (
