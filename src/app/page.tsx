@@ -4,15 +4,15 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { getTodos } from '@/actions/todo.actions';
 
 export default async function Page() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['todos'],
-    queryFn: async () => {
-      const todos = await getTodos();
-      if (Array.isArray(todos)) return todos;
-      throw new Error('error occured');
-    },
-  });
+  // const queryClient = new QueryClient();
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['todos'],
+  //   queryFn: async () => {
+  //     const todos = await getTodos();
+  //     if (Array.isArray(todos)) return todos;
+  //     throw new Error('error occured');
+  //   },
+  // });
 
   return (
     <>
@@ -25,9 +25,9 @@ export default async function Page() {
             <span className="text-purple">dum</span>
           </h1>
         </div>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Todos />
-        </HydrationBoundary>
+        {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
+        <Todos />
+        {/* </HydrationBoundary> */}
       </main>
     </>
   );
