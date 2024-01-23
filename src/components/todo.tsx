@@ -64,7 +64,9 @@ export const Todo = ({ id, content, done }: Props) => {
       <div onClick={() => updateTodoMutation(!done)} className="p-[3px] select-none">
         <Check check={done} />
       </div>
-      <p className={cn('w-full', done ? 'text-secondary line-through' : null)}>{content}</p>
+      <div className='w-full overflow-hidden'>
+        <p className={cn('w-full break-words', done ? 'text-secondary line-through' : null)}>{content}</p>
+      </div>
       <button onClick={() => deleteTodoMutation(id)} className="px-1.5 py-[5px] select-none">
         <Image src="/trash.svg" width={12.48} height={14} alt="Check" />
       </button>
